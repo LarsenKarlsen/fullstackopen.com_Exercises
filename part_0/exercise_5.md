@@ -20,9 +20,3 @@ activate server
 server->>browser: JSON file
 deactivate server
 Note over browser: Add list of notes, add eventlistner to form
-Note over browser: Fill the form and press Save button
-browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
-activate server
-server->>browser: StatusCode 201
-deactivate server
-Note right of browser: server response {"message":"note created"}

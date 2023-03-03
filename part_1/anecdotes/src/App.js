@@ -13,17 +13,53 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
 
   const handleRandomAnecdote = () => {
     const randomElementIndex = Math.floor(Math.random() * anecdotes.length)
     setSelected(randomElementIndex)
   }
 
+  const handleVote = () => {
+    const votesCopy = [...votes]
+    votesCopy[selected] = votesCopy[selected] + 1
+    setVotes(votesCopy)
+  }
+
+  const getAnecdoteIndexWithMaxVotes = () => {
+    const maxVotes = Math.max(...votes)
+    if (maxVotes>0) {
+      return votes.indexOf(maxVotes)
+    }
+    return -1
+  }
+
+  let maxVotes = getAnecdoteIndexWithMaxVotes()
+
   return (
     <div>
-      <div>{anecdotes[selected]}</div>
-      <button onClick={handleRandomAnecdote}>Next anecdote</button>
       
+      <div>
+        <h1>Anecdote of the day</h1>
+        <div>{anecdotes[selected]}</div>
+        <div>has {votes[selected]} votes</div>
+        <button onClick={handleVote}>vote</button>
+        <button onClick={handleRandomAnecdote}>Next anecdote</button>
+      </div>
+      
+      <div>
+        <h1>Anecdote with most votes</h1>
+        <div>
+          {
+            maxVotes === -1 ? <p>No votes</p> :
+            <div>
+              <div>{anecdotes[maxVotes]}</div>
+              <div>has {votes[maxVotes]} votes</div>
+            </div>
+          }
+        </div>
+      </div>
+    
     </div>
   )
 }

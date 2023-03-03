@@ -3,16 +3,21 @@ import { useState } from 'react'
 
 const Statistics = (props) => {
   const {good, neutral, bad, all, average, positive} = props
+  if (all>0){
+    return (
+      <>
+        <h1>statistics</h1>
+        <p>good: {good}</p>
+        <p>neutral: {neutral}</p>
+        <p>bad: {bad}</p>
+        <p>all: {all}</p>
+        <p>average: {average}</p>
+        <p>positive: {positive}</p>
+      </>
+    )
+  }
   return (
-    <>
-      <h1>statistics</h1>
-      <p>good: {good}</p>
-      <p>neutral: {neutral}</p>
-      <p>bad: {bad}</p>
-      <p>all: {all}</p>
-      <p>average: {average}</p>
-      <p>positive: {positive}</p>
-    </>
+    <p>No feedback given</p>
   )
 }
 

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 import FilterName from './components/FilterName'
 import Phonebook from './components/Phonebook'
@@ -6,14 +7,8 @@ import InputForm from './components/ImputForm'
 
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', phone:'123-456-789'},
-    { name: 'Murabi Bi', phone:'555-34-34'},
-    { name: 'Li Laz', phone:'765-456-789'},
-    { name: 'Frodo', phone:'123-456-3223'},
-    { name: 'Gromp', phone:'123-555-765'}
-  ]) 
-  const [newContact, setNewContact] = useState({name:"", phone:""})
+  const [persons, setPersons] = useState([]) 
+  const [newContact, setNewContact] = useState({name:"", number:""})
   const [nameFilter, setNewNameFilter] = useState('')
 
   const addContact = (event) => {
@@ -25,7 +20,7 @@ const App = () => {
     }
 
     setPersons([...persons, newContact])
-    setNewContact({name:"", phone:""})
+    setNewContact({name:"", number:""})
   }
 
   const onChangeContact = (event) => {
@@ -37,6 +32,13 @@ const App = () => {
   const onChangeFilter = (event) => {
     setNewNameFilter(event.target.value)
   }
+
+  useEffect(()=>{
+    console.log("effect")
+    axios
+    .get("http://localhost:3001/persons")
+    .then(response=>setPersons(response.data))
+  }, [])
 
 
   return (

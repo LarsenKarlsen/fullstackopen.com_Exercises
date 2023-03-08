@@ -4,7 +4,7 @@ const InputForm = (props) => {
     <form onSubmit={props.handleSubmit}>
       <div>
         <div>name: <input name='name' onChange={props.handleChange} value={props.newContact.name}/></div>
-        <div>phone: <input name='phone' onChange={props.handleChange} value={props.newContact.phone}/></div>
+        <div>number: <input name='number' onChange={props.handleChange} value={props.newContact.number}/></div>
       </div>
       <div>
         <button type="submit">add</button>

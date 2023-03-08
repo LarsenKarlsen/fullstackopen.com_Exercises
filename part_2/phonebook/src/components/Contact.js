@@ -1,7 +1,7 @@
 const Contact = (props) => {
-  const {name, phone} = props.contact
+  const {name, number} = props.contact
   
-  return <li>{name}: {phone}</li>
+  return <li>{name}: {number}</li>
 }
 
 export default Contact

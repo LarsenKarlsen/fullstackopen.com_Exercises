@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+
+import contactService from './services/contact'
 
 import FilterName from './components/FilterName'
 import Phonebook from './components/Phonebook'
@@ -19,8 +20,12 @@ const App = () => {
       return
     }
 
-    setPersons([...persons, newContact])
-    setNewContact({name:"", number:""})
+    contactService.create(newContact)
+    .then(retunedContact=>{
+      setPersons([...persons, retunedContact])
+      setNewContact({name:"", number:""})
+    })
+    .catch(error => {alert("Cant add new note to database")})
   }
 
   const onChangeContact = (event) => {
@@ -34,10 +39,8 @@ const App = () => {
   }
 
   useEffect(()=>{
-    console.log("effect")
-    axios
-    .get("http://localhost:3001/persons")
-    .then(response=>setPersons(response.data))
+    contactService.getAll()
+    .then(initialPersons=>setPersons(initialPersons))
   }, [])
 
 

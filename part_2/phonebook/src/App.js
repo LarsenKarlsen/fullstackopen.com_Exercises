@@ -37,6 +37,18 @@ const App = () => {
   const onChangeFilter = (event) => {
     setNewNameFilter(event.target.value)
   }
+  
+  const handleDelete = id => {
+    const contactToDel = persons.find(person => person.id===id)
+    if (window.confirm(`Are you sure to delete ${contactToDel.name}`)) {
+      contactService.deleteContact(contactToDel.id)
+      .then(res=>{
+        setPersons(persons.filter(person=>person.id!==contactToDel.id))
+      })
+      .catch(error=>{alert("there is something wrong when I try to delete contact")})
+    }
+
+  }
 
   useEffect(()=>{
     contactService.getAll()
@@ -50,7 +62,7 @@ const App = () => {
       <FilterName handleChange={onChangeFilter}/>
       <h2>Add new contact</h2>
       <InputForm handleSubmit={addContact} newContact={newContact} handleChange={onChangeContact}/>
-      <Phonebook persons={persons} nameFilter={nameFilter}/>
+      <Phonebook persons={persons} nameFilter={nameFilter} handleDelete={handleDelete}/>
     </div>
   )
 }

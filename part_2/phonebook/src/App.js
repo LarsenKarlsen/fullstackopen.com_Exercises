@@ -16,7 +16,13 @@ const App = () => {
     event.preventDefault()
     
     if (persons.filter(person=>person.name===newContact.name).length>0){
-      alert(`${newContact.name} is alredy in phonebook`)
+      const personToUpdate = persons.find(person=>person.name===newContact.name)
+      if (window.confirm(`Contact with name ${personToUpdate.name} alredy exists. Do you want to change number of contact from ${personToUpdate.number} to ${newContact.number}?`)){
+        contactService.updateContact(personToUpdate.id, newContact)
+        .then(res=>setPersons(persons.map(person=>person.id===personToUpdate.id? res:person)))
+        .catch(error=>{alert(`${error}`)})
+      }
+
       return
     }
 

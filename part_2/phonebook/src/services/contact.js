@@ -17,5 +17,10 @@ const deleteContact = id => {
     return req.then(res=>res.data)
 }
 
+const updateContact = (id, contactToUpdate) => {
+    const req = axios.put(`${baseUrl}/${id}`, contactToUpdate)
+    return req.then(res=>res.data)
+}
+
 //eslint-disable-next-line
-export default {getAll, create, deleteContact}
+export default {getAll, create, deleteContact, updateContact}

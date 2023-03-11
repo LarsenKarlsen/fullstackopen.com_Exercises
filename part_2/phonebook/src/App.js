@@ -5,12 +5,14 @@ import contactService from './services/contact'
 import FilterName from './components/FilterName'
 import Phonebook from './components/Phonebook'
 import InputForm from './components/ImputForm'
+import Notification from './components/Notification'
 
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newContact, setNewContact] = useState({name:"", number:""})
   const [nameFilter, setNewNameFilter] = useState('')
+  const [notification, setNotification] = useState({message: null, type:""})
 
   const addContact = (event) => {
     event.preventDefault()
@@ -19,7 +21,12 @@ const App = () => {
       const personToUpdate = persons.find(person=>person.name===newContact.name)
       if (window.confirm(`Contact with name ${personToUpdate.name} alredy exists. Do you want to change number of contact from ${personToUpdate.number} to ${newContact.number}?`)){
         contactService.updateContact(personToUpdate.id, newContact)
-        .then(res=>setPersons(persons.map(person=>person.id===personToUpdate.id? res:person)))
+        .then(res=>{
+          setPersons(persons.map(person=>person.id===personToUpdate.id? res:person))
+          setNewContact({name:"", number:""})
+          setNotification({message:`Update ${res.name} in Phonebook`, type:""})
+          setTimeout(()=>{setNotification({message:null, type:""})}, 5000)
+        })
         .catch(error=>{alert(`${error}`)})
       }
 
@@ -30,6 +37,8 @@ const App = () => {
     .then(retunedContact=>{
       setPersons([...persons, retunedContact])
       setNewContact({name:"", number:""})
+      setNotification({message:`Added ${retunedContact.name} to Phonebook`, type:""})
+      setTimeout(()=>{setNotification({message:null, type:""})}, 5000)
     })
     .catch(error => {alert("Cant add new note to database")})
   }
@@ -67,6 +76,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <FilterName handleChange={onChangeFilter}/>
       <h2>Add new contact</h2>
+      <Notification data={notification}/>
       <InputForm handleSubmit={addContact} newContact={newContact} handleChange={onChangeContact}/>
       <Phonebook persons={persons} nameFilter={nameFilter} handleDelete={handleDelete}/>
     </div>

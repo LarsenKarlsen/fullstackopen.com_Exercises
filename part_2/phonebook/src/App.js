@@ -27,7 +27,11 @@ const App = () => {
           setNotification({message:`Update ${res.name} in Phonebook`, type:""})
           setTimeout(()=>{setNotification({message:null, type:""})}, 5000)
         })
-        .catch(error=>{alert(`${error}`)})
+        .catch(error=>{
+          setNotification({message:`${newContact.name} doesn't exist in Phonebook`, type:"error"})
+          setTimeout(()=>{setNotification({message:null, type:""})}, 5000)
+          setNewContact({name:"", number:""})
+        })
       }
 
       return

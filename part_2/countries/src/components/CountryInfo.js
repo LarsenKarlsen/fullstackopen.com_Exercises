@@ -1,29 +1,11 @@
-const CountryInfo = ({countries, searched}) => {
+import SetCountryButton from "./SetCountryButton"
+
+const CountryInfo = ({countries, searched, handleSetCountryClick}) => {
   const style = {
     width: "250px",
     maxHeigth: "500px",
     border: "1px solid black"
   }
-
-
-  if ((countries == null) || (countries.length===0)){
-    return null
-  }
-
-  if ((countries.length>10)){
-    return <div>Too many matches. Specify another filter</div>
-  }
-
-  if ((countries.length>1)){
-    return (
-      <div>
-        <ul>
-          {countries.map(c=><li key={c.name.common}>{c.name.common}</li>)}
-        </ul>
-      </div>
-    )
-  }
-  
   if (searched){
     return (
       <div>
@@ -42,6 +24,24 @@ const CountryInfo = ({countries, searched}) => {
         <div>
           <img style={style} src={searched.flags.svg} alt=""></img>
         </div>
+      </div>
+    )
+  }
+
+  if ((countries == null) || (countries.length===0)){
+    return null
+  }
+
+  if ((countries.length>10)){
+    return <div>Too many matches. Specify another filter</div>
+  }
+
+  if ((countries.length>1)){
+    return (
+      <div>
+        <ul>
+          {countries.map(c=><li key={c.name.common}>{c.name.common} <SetCountryButton handleClick={()=>{handleSetCountryClick(c.name.common)}}/></li>)}
+        </ul>
       </div>
     )
   }

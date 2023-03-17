@@ -20,6 +20,12 @@ function App() {
     }
   }
 
+  const handleSetCountryClick = (country) => {
+    const countryData = countries.filter(countrie=>countrie.name.common.toLowerCase().includes(country.toLowerCase()))
+    console.log(countryData[0])
+    setSearchedCountry(countryData[0])
+  }
+
   useEffect(()=>{
     axios
     .get("https://restcountries.com/v3.1/all")
@@ -31,7 +37,7 @@ function App() {
     <div>
       <SearchForm handleChange={handleChange}/>
       <h1>Results</h1>
-      <CountryInfo countries={filteredCountries} searched={searchedCountry}/>
+      <CountryInfo countries={filteredCountries} searched={searchedCountry} handleSetCountryClick={handleSetCountryClick}/>
     </div>
   )
 }

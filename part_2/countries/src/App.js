@@ -13,8 +13,7 @@ function App() {
   const [weather, setWeather] = useState(null)
 
   const handleChange = (event) => {
-    console.log(countries.length)
-    if ((event.target.value.length > 0) & (countries.length>0)) {
+    if ((event.target.value.length > 0) & (Array.isArray(countries))) {
       const filtered = countries.filter(countrie=>countrie.name.common.toLowerCase().includes(event.target.value.toLowerCase()))
       setFilteredCountries(filtered)
       setSearchedCountry(null)

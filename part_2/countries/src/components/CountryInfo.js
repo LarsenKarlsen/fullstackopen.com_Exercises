@@ -1,6 +1,7 @@
 import SetCountryButton from "./SetCountryButton"
+import Weather from "./Weather"
 
-const CountryInfo = ({countries, searched, handleSetCountryClick}) => {
+const CountryInfo = ({countries, searched, handleSetCountryClick, weather}) => {
   const style = {
     width: "250px",
     maxHeigth: "500px",
@@ -24,6 +25,10 @@ const CountryInfo = ({countries, searched, handleSetCountryClick}) => {
         <div>
           <img style={style} src={searched.flags.svg} alt=""></img>
         </div>
+        {weather?
+        <Weather weather={weather} city={searched.capital[0]}/>:
+        null}
+
       </div>
     )
   }

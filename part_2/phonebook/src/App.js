@@ -44,7 +44,10 @@ const App = () => {
       setNotification({message:`Added ${retunedContact.name} to Phonebook`, type:""})
       setTimeout(()=>{setNotification({message:null, type:""})}, 5000)
     })
-    .catch(error => {alert("Cant add new note to database")})
+    .catch(error => {
+      setNotification({message: error.response.data.error, type:"error"})
+      setTimeout(()=>{setNotification({message:null, type:""})}, 5000)
+    })
   }
 
   const onChangeContact = (event) => {

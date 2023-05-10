@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
 
-import { upvote } from '../reducers/anecdoteReducer'
 import Filter from './Filter'
 
 
@@ -21,7 +20,7 @@ const AnecdoteList = () => {
           </div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => dispatch(upvote(anecdote.id))}>vote</button>
+            <button onClick={() => dispatch({type: 'anecdote/upvote', payload: {id: anecdote.id}})}>vote</button>
           </div>
         </div>
       )}

@@ -9,6 +9,12 @@ const AnecdoteList = () => {
   })
   const dispatch = useDispatch()
 
+  const handleClick = (id, content) => {
+    dispatch({type: 'anecdote/upvote', payload: {id: id}})
+    dispatch({type: 'notification/show', payload: `You voted for '${content}'`})
+    setTimeout(() => dispatch({type: 'notification/hide'}), 5000)
+  }
+
   return (
     <div>
     <Filter />
@@ -20,7 +26,7 @@ const AnecdoteList = () => {
           </div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => dispatch({type: 'anecdote/upvote', payload: {id: anecdote.id}})}>vote</button>
+            <button onClick={() => handleClick(anecdote.id, anecdote.content)}>vote</button>
           </div>
         </div>
       )}

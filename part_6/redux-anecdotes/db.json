@@ -44,6 +44,11 @@
       "content": "testus",
       "votes": 0,
       "id": "4ArzmzC"
+    },
+    {
+      "content": "test async action creator",
+      "votes": 0,
+      "id": "lqTvvOQ"
     }
   ]
 }

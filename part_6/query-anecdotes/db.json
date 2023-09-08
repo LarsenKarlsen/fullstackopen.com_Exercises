@@ -37,8 +37,13 @@
     },
     {
       "content": "test 2",
-      "votes": 12,
+      "votes": 13,
       "id": "yPu1KI7"
+    },
+    {
+      "content": "testus",
+      "votes": 0,
+      "id": "X02-z9-"
     }
   ]
 }

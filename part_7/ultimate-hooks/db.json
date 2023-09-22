@@ -1,0 +1,32 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "content": "json-server"
+    },
+    {
+      "id": 342,
+      "content": "new note"
+    },
+    {
+      "id": 6023,
+      "content": "po"
+    },
+    {
+      "id": 603,
+      "content": "poridje"
+    }
+  ],
+  "persons": [
+    {
+      "id": 1,
+      "name": "some comment",
+      "number": "123123123123"
+    },
+    {
+      "id": 881,
+      "name": "123",
+      "number": "555"
+    }
+  ]
+}
